@@ -3,6 +3,10 @@ import Main from "./components/Main";
 import { useEffect, useState } from "react";
 import "./App.css";
 
+import { RestaurantContext } from "./context/RestaurantContext";
+import AddRestaurant from "./components/AddRestaurant";
+import RestaurantsContainer from "./components/RestaurantsContainer";
+
 function App() {
   const [restaurantState, setRestaurants] = useState([]);
 
@@ -25,9 +29,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Main />
-    </div>
+    <RestaurantContext.Provider
+      value={{ restaurants: restaurantState, updateRestaurants }}
+    >
+      <div className="App">
+        <AddRestaurant />
+        <RestaurantsContainer />
+      </div>
+    </RestaurantContext.Provider>
   );
 }
 export default App;
